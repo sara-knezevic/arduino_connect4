@@ -24,10 +24,13 @@ def get_play_options(state):
 def end_game(status, current_state):
     if status == GAME_MIN_WINNER:
         sys.stdout.write('You win!\n')
+        ser.write(b'P')
     elif status == GAME_MAX_WINNER:
         sys.stdout.write('Algorithm wins!\n')
+        ser.write(b'A')
     elif status == GAME_DRAW:
         sys.stdout.write('It\s a draw!\n')
+        ser.write(b'PA')
 
     sys.exit(1)
     
