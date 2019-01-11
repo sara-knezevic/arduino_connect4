@@ -19,9 +19,9 @@ class State:
         for i in range(0, self.height):
             for j in range(0, self.width):
                 if self.board[i][j] == EMPTY_SLOT:
-                    string += ' %d ' % self.board[i][j]
+                    string += ' %s ' % self.board[i][j]
                 else:
-                    string += '%+d ' % self.board[i][j]
+                    string += '%+s ' % self.board[i][j]
             string += '\n'
         return string
 

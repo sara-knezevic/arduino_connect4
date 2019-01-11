@@ -1,11 +1,16 @@
 import sys
 from copy import deepcopy
+import serial
 
 from alphabeta import alphabeta
 from connect4 import State, done, score, successor
 from constants import (EMPTY_SLOT, GAME_DRAW, GAME_MAX_WINNER, GAME_MIN_WINNER,
-                       GAME_NO_WINNER, MAX_PLAYER)
+                       GAME_NO_WINNER, MAX_PLAYER, MIN_PLAYER)
 
+ser = serial.Serial()
+ser.timeout = 1
+ser.port = '/dev/ttyACM1' 
+ser.open()
 
 def get_play_options(state):
     options = []
@@ -18,11 +23,11 @@ def get_play_options(state):
 
 def end_game(status, current_state):
     if status == GAME_MIN_WINNER:
-        sys.stdout.write('Human Win!\n')
+        sys.stdout.write('You win!\n')
     elif status == GAME_MAX_WINNER:
-        sys.stdout.write('Computer Win!\n')
+        sys.stdout.write('Algorithm wins!\n')
     elif status == GAME_DRAW:
-        sys.stdout.write('Computer Win!\n')
+        sys.stdout.write('It\s a draw!\n')
 
     sys.exit(1)
     
@@ -44,13 +49,20 @@ def human_vs_computer():
         print(current_state)
         options = get_play_options(current_state)
         for i in range(0, current_state.width):
-            sys.stdout.write(' ' + str(i) + ' ')
-        sys.stdout.write('\n-> ')
+            sys.stdout.write(' ' + str(i + 1) + ' ')
+        sys.stdout.write('\n ')
 
-        col = int(input())
+        while True:
+            ard = ser.readline().decode().strip('\r\n')
+
+            if (ard != ''):
+                break
+
+        col = int(ard) - 1
+
         for i, j in options:
             if col != j: continue
-            current_state.board[i][j] = -1
+            current_state.board[i][j] = MIN_PLAYER
 
         update_game(current_state)
         

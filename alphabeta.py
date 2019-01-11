@@ -1,5 +1,4 @@
 import math
-
 from constants import GAME_NO_WINNER, MAX_PLAYER, MIN_PLAYER
 
 

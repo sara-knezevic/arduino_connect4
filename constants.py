@@ -1,8 +1,7 @@
-
 # Board
-MAX_PLAYER = +1
-MIN_PLAYER = -1
-EMPTY_SLOT = 0
+MAX_PLAYER = " ☀"
+MIN_PLAYER = " ❄️"
+EMPTY_SLOT = "_"
 
 # Game Status
 GAME_MAX_WINNER = 1
