@@ -1,6 +1,6 @@
-import sys
 from copy import deepcopy
 import serial
+import sys
 
 from alphabeta import alphabeta
 from connect4 import State, done, score, successor
@@ -9,7 +9,7 @@ from constants import (EMPTY_SLOT, GAME_DRAW, GAME_MAX_WINNER, GAME_MIN_WINNER,
 
 ser = serial.Serial()
 ser.timeout = 1
-ser.port = '/dev/ttyACM1' 
+ser.port = '/dev/ttyACM0' 
 ser.open()
 
 def get_play_options(state):

@@ -185,10 +185,8 @@ def _can_opponent_win(state, opponent, i, j):
     ]
 
     for _i, _j, _ii, _jj in neighbors:
-        if (_j >= 0 and _j < state.width and _i >= 0 and _i < state.height) and\
-            (state.board[_i][_j] == EMPTY_SLOT):
-            if (_jj >= 0 and _jj < state.width and _ii >= 0 and _ii < state.height) and\
-               (state.board[_ii][_jj] != EMPTY_SLOT):
+        if (_j >= 0 and _j < state.width and _i >= 0 and _i < state.height) and (state.board[_i][_j] == EMPTY_SLOT):
+            if (_jj >= 0 and _jj < state.width and _ii >= 0 and _ii < state.height) and (state.board[_ii][_jj] != EMPTY_SLOT):
                 state.board[_i][_j] = opponent
                 result = done(state)
                 state.board[_i][_j] = EMPTY_SLOT

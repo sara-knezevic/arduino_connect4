@@ -2,8 +2,8 @@ import math
 from constants import GAME_NO_WINNER, MAX_PLAYER, MIN_PLAYER
 
 
-def alphabeta(state, max_depth, player, score=None, done=None, successor=None,
-              alpha=-math.inf, beta=math.inf, depth=1):
+def alphabeta(state, max_depth, player, score = None, done = None, successor = None,
+              alpha = -math.inf, beta = math.inf, depth=1):
     """ Minimax algorithm with Alpha-Beta pruning limited by Depth """
 
     if depth >= max_depth or done(state) != GAME_NO_WINNER:
