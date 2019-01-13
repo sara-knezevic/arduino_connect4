@@ -1,5 +1,4 @@
 from copy import deepcopy
-
 from constants import *
 import sys
 
@@ -195,7 +194,6 @@ def _can_opponent_win(state, opponent, i, j):
 
     return False
         
-
 def score(state):
     max_score = 0
     min_score = 0
