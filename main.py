@@ -62,6 +62,7 @@ def human_vs_computer():
                 break
 
         col = int(ard) - 1
+        # col = int(input)
 
         for i, j in options:
             if col != j: continue
