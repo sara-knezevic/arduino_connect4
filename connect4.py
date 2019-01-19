@@ -26,7 +26,7 @@ class State:
 
 def done(state):
 
-    # check rows
+    # check row wins
     for i in range(0, state.height):
         count_max, count_min = 0, 0
         for j in range(0, state.width):
@@ -36,7 +36,7 @@ def done(state):
             if count_max >= 4: return GAME_MAX_WINNER
             if count_min >= 4: return GAME_MIN_WINNER
 
-    # check cols
+    # check column wins
     for j in range(0, state.width):
         count_max, count_min = 0, 0
         for i in range(0, state.height):
