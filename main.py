@@ -6,10 +6,10 @@ from alphabeta import alphabeta
 from connect4 import State, done, score, successor
 from constants import *
 
-ser = serial.Serial()
-ser.timeout = 1
-ser.port = '/dev/ttyACM0' 
-ser.open()
+# ser = serial.Serial()
+# ser.timeout = 1
+# ser.port = '/dev/ttyACM0' 
+# ser.open()
 
 def get_play_options(state):
     options = []
@@ -51,14 +51,14 @@ def human_vs_computer():
             sys.stdout.write(' ' + str(i + 1) + ' ')
         sys.stdout.write('\n ')
 
-        while True:
-            ard = ser.readline().decode().strip('\r\n')
+        # while True:
+        #     ard = ser.readline().decode().strip('\r\n')
 
-            if (ard != ''):
-                break
+        #     if (ard != ''):
+        #         break
 
-        col = int(ard) - 1
-        # col = int(input()) - 1 
+        # col = int(ard) - 1
+        col = int(input()) - 1 
 
         for i, j in options:
             if col != j: continue
