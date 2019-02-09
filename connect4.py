@@ -1,6 +1,7 @@
 from copy import deepcopy
 from constants import *
-import sys
+import sys, pygame
+import numpy as np
 
 class State:
     def __init__(self, width, height):
@@ -23,6 +24,33 @@ class State:
                     string += '%+s ' % self.board[i][j]
             string += '\n'
         return string
+
+def draw(state, screen, width, height, field_size, circle_size):
+
+    screen.fill((0, 0, 0))
+    board = np.array(state.board)
+
+    for h in range(int(height/5)):
+        for w in range(int(width/5)):
+            rect = pygame.Rect(w * (field_size + 2), h * (field_size + 2),
+                                field_size, field_size)
+            pygame.draw.rect(screen, (255, 255, 255), rect)
+
+    player_i, player_j = np.where(board == ' ❄️')
+
+    for p in range(0, len(player_i)):
+        player_circle = pygame.draw.circle(screen, (235, 55, 10),
+                                           [player_j[p] * 102 + 51,
+                                            player_i[p] * 102 + 51],
+                                           circle_size)
+
+    algorithm_i, algorithm_j = np.where(board == ' ☀')
+
+    for a in range(0, len(algorithm_i)):
+        algorithm_circle = pygame.draw.circle(screen, (52, 55, 10),
+                                              [algorithm_j[a] * 102 + 51,
+                                               algorithm_i[a] * 102 + 51],
+                                              circle_size)
 
 def done(state):
 

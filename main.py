@@ -1,9 +1,7 @@
-from copy import deepcopy
-import serial
-import sys
+import sys, pygame
 
 from alphabeta import alphabeta
-from connect4 import State, done, score, successor
+from connect4 import State, done, score, successor, draw
 from constants import *
 
 # ser = serial.Serial()
@@ -28,20 +26,46 @@ def end_game(status, current_state):
     elif status == GAME_DRAW:
         sys.stdout.write('It\s a draw!\n')
 
+    input()
     sys.exit(1)
     
-def update_game(current_state):
+def update_game(current_state, screen):
     status = done(current_state)
+
+    draw(current_state, screen, grid_width, grid_height,
+         field_size, circle_size)
+    pygame.display.flip()
 
     sys.stdout.write(str(current_state) + '\n')
     
     if status != GAME_NO_WINNER:
         end_game(status, current_state)
 
+# pygame parameters
+grid_width = 510
+grid_height = 510
+
+field_size = 100
+circle_size = 40
+
 def human_vs_computer():
     current_state = State(width = 5, height = 5)
 
-    while True:
+    pygame.init()
+
+    screen = pygame.display.set_mode((grid_width, grid_height))
+    game_over = False
+
+    while not game_over:
+
+        draw(current_state, screen, grid_width, grid_height,
+             field_size, circle_size)
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_over = True
 
         # Human Turn
         sys.stdout.write('\n')
@@ -64,11 +88,16 @@ def human_vs_computer():
             if col != j: continue
             current_state.board[i][j] = MIN_PLAYER
 
-        update_game(current_state)
+        update_game(current_state, screen)
         
         # AI Turn
         current_state, _score = alphabeta(current_state, 5, MAX_PLAYER, score, done, successor)
-        update_game(current_state)
+        update_game(current_state, screen)
+
+        #draw(current_state, screen, grid_width, grid_height,
+        #     field_size, circle_size)
+
+    pygame.quit()
 
     
 if __name__ == '__main__':
